@@ -6,3 +6,8 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, i
   setFixedSize(w,h);
   move(x,y);
 }
+
+void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
+{
+
+}
