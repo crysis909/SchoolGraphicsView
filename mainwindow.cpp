@@ -6,8 +6,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-
+    myView= new Q4xBKIFGraphicsView(this,10,10,450,450);
+    myView->show();
 }
 
 MainWindow::~MainWindow()
