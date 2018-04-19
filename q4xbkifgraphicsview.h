@@ -3,11 +3,12 @@
 
 #include <QObject>
 #include <QWidget>
+#include <QGraphicsView>
 
 class Q4xBKIFGraphicsView : public QGraphicsView
 {
 public:
-    Q4xBKIFGraphicsView();
+    Q4xBKIFGraphicsView(QWidget *parent,int x,int y,int w,int h);
 };
 
 #endif // Q4XBKIFGRAPHICSVIEW_H
