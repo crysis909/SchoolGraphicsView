@@ -24,8 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    q4xbkifgraphicsview.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    q4xbkifgraphicsview.h
 
 FORMS    += mainwindow.ui
