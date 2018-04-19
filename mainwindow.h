@@ -18,6 +18,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Q4xBKIFGraphicsView * myView;
 };
 
 #endif // MAINWINDOW_H
