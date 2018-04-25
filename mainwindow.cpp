@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     myView= new Q4xBKIFGraphicsView(this,10,10,450,450);
     myView->show();
+    connect(myView,SIGNAL(getposition(int,int)),this,SLOT(exitposition(int,int)));
 
 }
 

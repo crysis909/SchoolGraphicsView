@@ -7,6 +7,7 @@
 
 class Q4xBKIFGraphicsView : public QGraphicsView
 {
+    Q_OBJECT
 public:
     Q4xBKIFGraphicsView(QWidget *parent,int x,int y,int w,int h);
 
