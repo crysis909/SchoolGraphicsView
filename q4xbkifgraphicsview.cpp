@@ -1,4 +1,5 @@
 #include "q4xbkifgraphicsview.h"
+#include <QMouseEvent>
 #include <QMessageBox>
 
 Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, int h)
@@ -10,8 +11,10 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, i
 
 void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-    QMessageBox msgBox;
+/*//DEBUG:
+ *     QMessageBox msgBox;
       msgBox.setText("The mouse Button has ben pressed");
       msgBox.exec();
-
+*/
+    emit getposition(event->x(),event->y());
 }
