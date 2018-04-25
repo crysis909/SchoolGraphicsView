@@ -9,6 +9,10 @@ class Q4xBKIFGraphicsView : public QGraphicsView
 {
 public:
     Q4xBKIFGraphicsView(QWidget *parent,int x,int y,int w,int h);
+
+signals:
+    void getposition(int x,int y);
+
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
 };
