@@ -1,7 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-//#include <QGridLayout> optional
+#include <QGridLayout>
 #include <QMainWindow>
 #include "q4xbkifgraphicsview.h"
 
@@ -20,6 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
     Q4xBKIFGraphicsView *myView;
+    QGridLayout *layout;
+    QWidget *widget;
 
 private slots:
     void exitposition(int x,int y);

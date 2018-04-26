@@ -11,14 +11,14 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, i
 
 void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
 {
-  //DEBUG:
-    qDebug() << "Pressed";
+    //DEBUG:
+    //qDebug() << "Pressed";
     emit getposition(event->x(),event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-  //DEBUG:
-    qDebug() << "Released";
+    //DEBUG:
+    //qDebug() << "Released";
     emit getposition(event->x(),event->y());
 }
