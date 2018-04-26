@@ -16,6 +16,7 @@ signals:
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
+    virtual void mouseReleaseEvent(QMouseEvent *event);
 };
 
 #endif // Q4XBKIFGRAPHICSVIEW_H
