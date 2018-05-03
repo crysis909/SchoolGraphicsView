@@ -3,6 +3,7 @@
 
 #include <QGridLayout>
 #include <QMainWindow>
+#include <QGraphicsScene>
 #include "q4xbkifgraphicsview.h"
 
 namespace Ui {
@@ -15,6 +16,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+     QGraphicsScene *scene;
     ~MainWindow();
 
 private:
@@ -24,7 +26,8 @@ private:
     QWidget *widget;
 
 private slots:
-    void exitposition(int x,int y);
+    void exitposition_pressed(int x,int y);
+    void exitposition_released(int x,int y);
 };
 
 #endif // MAINWINDOW_H

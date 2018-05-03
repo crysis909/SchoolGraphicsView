@@ -2,23 +2,28 @@
 #include <QMouseEvent>
 #include <QDebug>
 
-Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, int h)
+Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene)
     :QGraphicsView(parent)
 {
-    setFixedSize(w,h);
-    move(x,y);
 }
 
 void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
 {
     //DEBUG:
     //qDebug() << "Pressed";
-    emit getposition(event->x(),event->y());
+    emit getposition_pressed(event->x(),event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
     //DEBUG:
     //qDebug() << "Released";
-    emit getposition(event->x(),event->y());
+    scene()->addRect(event->x(),event->y(), 10, 10);
+    emit getposition_released(event->x(),event->y());
+
+}
+
+void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
+{
+
 }
