@@ -37,9 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete myView;
     delete layout;
     delete widget;
+    delete myView;
     delete ui;
 }
 

@@ -15,6 +15,23 @@ MainWindow::MainWindow(QWidget *parent) :
     widget = new QWidget(this);
 
     //Layout
+<<<<<<< HEAD
+    layout->addWidget(myView,0,0,Qt::AlignTop);
+    layout->addWidget(ui->graphicsView,0,1,Qt::AlignTop);
+    layout->addWidget(ui->label_x,0,1,Qt::AlignLeft);
+    layout->addWidget(ui->label_y,0,1,Qt::AlignJustify);
+
+    //Set default Text
+    ui->label_x->setText("X: 0");
+    ui->label_y->setText("Y: 0");
+
+    //Connects
+    connect(myView,SIGNAL(getposition(int,int)),this,SLOT(exitposition(int,int)));
+
+    myView->show();
+
+    //Set Widget and Layout to Mainwindow
+=======
     layout->addWidget(myView,0,0,1,1);
     layout->addWidget(ui->graphicsView,0,1);
     layout->addWidget(ui->label_x,1,1,1,1,Qt::AlignLeft);
@@ -31,6 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(myView,SIGNAL(getposition_released(int,int)),this,SLOT(exitposition_released(int,int)));
 
     //Set Layout and Widget
+>>>>>>> 0cc46292035c4fcd1d53dfe9addb15a1c59e5903
     widget->setLayout(layout);
     setCentralWidget(widget);
 }
