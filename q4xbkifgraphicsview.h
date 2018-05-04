@@ -5,6 +5,8 @@
 #include <QWidget>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsRectItem>
+#include <QPoint>
 
 class Q4xBKIFGraphicsView : public QGraphicsView
 {
@@ -15,6 +17,11 @@ public:
 signals:
     void getposition_pressed(int x,int y);
     void getposition_released(int x,int y);
+
+private:
+    QPoint beginPoint;
+    QPoint lastPoint;
+    QGraphicsRectItem *rect;
 
 protected:
     virtual void mousePressEvent(QMouseEvent *event);

@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Init
     scene = new QGraphicsScene(this);
     myView = new Q4xBKIFGraphicsView(this);
-    myView->setScene(scene);
     layout = new QGridLayout(this);
     widget = new QWidget(this);
 
