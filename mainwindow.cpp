@@ -9,15 +9,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Init
     scene = new QGraphicsScene();
-    myView = new Q4xBKIFGraphicsView(this,scene);
+    myView = new Q4xBKIFGraphicsView(this, scene);
     layout = new QGridLayout();
     widget = new QWidget(this);
 
     //Layout
-    layout->addWidget(myView,0,0,1,1);
-    layout->addWidget(ui->graphicsView,0,1);
-    layout->addWidget(ui->label_x,1,1,1,1,Qt::AlignLeft);
-    layout->addWidget(ui->label_y,1,1,1,1,Qt::AlignRight);
+    layout->addWidget(myView, 0, 0, 1, 1);
+    layout->addWidget(ui->graphicsView, 0, 1);
+    layout->addWidget(ui->label_x, 1, 1, 1, 1, Qt::AlignLeft);
+    layout->addWidget(ui->label_y, 1, 1, 1, 1, Qt::AlignRight);
 
     //Default values
     ui->label_x->setText("X: 0");
@@ -26,8 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
     myView->show();
 
     //Connects
-    connect(myView,SIGNAL(getposition_pressed(int,int)),this,SLOT(exitposition_pressed(int,int)));
-    connect(myView,SIGNAL(getposition_released(int,int)),this,SLOT(exitposition_released(int,int)));
+    connect(myView, SIGNAL(getposition_pressed(int, int)), this, SLOT(exitposition_pressed(int, int)));
+    connect(myView, SIGNAL(getposition_released(int, int)), this, SLOT(exitposition_released(int, int)));
 
     //Set Layout and Widget
     widget->setLayout(layout);

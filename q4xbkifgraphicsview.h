@@ -17,8 +17,8 @@ public:
     ~Q4xBKIFGraphicsView();
 
 signals:
-    void getposition_pressed(int x,int y);
-    void getposition_released(int x,int y);
+    void getposition_pressed(int x, int y);
+    void getposition_released(int x, int y);
 
 private:
     QPoint beginPoint;

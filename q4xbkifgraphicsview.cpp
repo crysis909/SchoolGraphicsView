@@ -34,9 +34,9 @@ void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
     if(rect)
         delete rect;
 
-    rect = scene()->addRect(QRect(beginPoint,beginPoint));
+    rect = scene()->addRect(QRect(beginPoint, beginPoint));
 
-    emit getposition_pressed(event->x(),event->y());
+    emit getposition_pressed(event->x(), event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
@@ -44,12 +44,12 @@ void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     lastPoint.setX(event->x());
     lastPoint.setY(event->y());
 
-    rect->setRect(QRect(beginPoint,lastPoint));
+    rect->setRect(QRect(beginPoint, lastPoint));
 
-    emit getposition_released(event->x(),event->y());
+    emit getposition_released(event->x(), event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    rect->setRect(beginPoint.x(),beginPoint.y(),event->x()-beginPoint.x(),event->y()-beginPoint.y());
+    rect->setRect(beginPoint.x(), beginPoint.y(), event->x() - beginPoint.x(), event->y() - beginPoint.y());
 }

@@ -26,8 +26,8 @@ private:
     QWidget *widget;
 
 private slots:
-    void exitposition_pressed(int x,int y);
-    void exitposition_released(int x,int y);
+    void exitposition_pressed(int x, int y);
+    void exitposition_released(int x, int y);
 };
 
 #endif // MAINWINDOW_H
