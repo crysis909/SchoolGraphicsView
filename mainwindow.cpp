@@ -8,9 +8,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     //Init
-    scene = new QGraphicsScene(this);
-    myView = new Q4xBKIFGraphicsView(this);
-    layout = new QGridLayout(this);
+    scene = new QGraphicsScene();
+    myView = new Q4xBKIFGraphicsView(this,scene);
+    layout = new QGridLayout();
     widget = new QWidget(this);
 
     //Layout

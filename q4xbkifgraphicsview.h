@@ -12,7 +12,9 @@ class Q4xBKIFGraphicsView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene = nullptr);
+    Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene);
+    Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, int h, QGraphicsScene *scene);
+    ~Q4xBKIFGraphicsView();
 
 signals:
     void getposition_pressed(int x,int y);
