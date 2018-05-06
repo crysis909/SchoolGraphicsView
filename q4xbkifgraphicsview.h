@@ -23,8 +23,7 @@ signals:
 private:
     QPoint beginPoint;
     QPoint lastPoint;
-    QGraphicsRectItem *rect;
-
+    QGraphicsRectItem *rectItem;
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);

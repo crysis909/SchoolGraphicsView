@@ -7,7 +7,7 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene)
 {
     setScene(scene);
     this->scene()->setParent(this);
-    rect = nullptr;
+    rectItem = nullptr;
 }
 
 Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, int h, QGraphicsScene *scene)
@@ -17,12 +17,12 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, i
     move(x,y);
     setScene(scene);
     this->scene()->setParent(this);
-    rect = nullptr;
+    rectItem = nullptr;
 }
 
 Q4xBKIFGraphicsView::~Q4xBKIFGraphicsView()
 {
-    delete rect;
+    delete rectItem;
     delete scene();
 }
 
@@ -31,10 +31,10 @@ void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
     beginPoint.setX(event->x());
     beginPoint.setY(event->y());
 
-    if(rect)
-        delete rect;
+    if(rectItem)
+        delete rectItem;
 
-    rect = scene()->addRect(QRect(beginPoint, beginPoint));
+    rectItem = scene()->addRect(QRect(beginPoint, beginPoint));
 
     emit getposition_pressed(event->x(), event->y());
 }
@@ -44,12 +44,12 @@ void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
     lastPoint.setX(event->x());
     lastPoint.setY(event->y());
 
-    rect->setRect(QRect(beginPoint, lastPoint));
+    rectItem->setRect(QRect(beginPoint, lastPoint));
 
     emit getposition_released(event->x(), event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    rect->setRect(beginPoint.x(), beginPoint.y(), event->x() - beginPoint.x(), event->y() - beginPoint.y());
+    rectItem->setRect(beginPoint.x(), beginPoint.y(), event->x() - beginPoint.x(), event->y() - beginPoint.y());
 }
