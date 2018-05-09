@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
+#include <QResizeEvent>
 #include <QPoint>
 
 class Q4xBKIFGraphicsView : public QGraphicsView
@@ -24,10 +25,12 @@ private:
     QPoint beginPoint;
     QPoint lastPoint;
     QGraphicsRectItem *rectItem;
+
 protected:
     virtual void mousePressEvent(QMouseEvent *event);
     virtual void mouseReleaseEvent(QMouseEvent *event);
     virtual void mouseMoveEvent(QMouseEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 };
 
 #endif // Q4XBKIFGRAPHICSVIEW_H

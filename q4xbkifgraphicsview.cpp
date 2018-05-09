@@ -6,6 +6,8 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene)
     :QGraphicsView(parent)
 {
     setScene(scene);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->scene()->setParent(this);
     rectItem = nullptr;
 }
@@ -16,6 +18,8 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, i
     setFixedSize(w,h);
     move(x,y);
     setScene(scene);
+    setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->scene()->setParent(this);
     rectItem = nullptr;
 }
@@ -52,4 +56,10 @@ void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
     rectItem->setRect(beginPoint.x(), beginPoint.y(), event->x() - beginPoint.x(), event->y() - beginPoint.y());
+}
+
+void Q4xBKIFGraphicsView::resizeEvent(QResizeEvent *event)
+{
+    scene()->setSceneRect(rect());
+    QGraphicsView::resizeEvent(event);
 }
