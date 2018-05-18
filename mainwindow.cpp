@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "mandel_window.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,11 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Layout
     layout->addWidget(myView, 0, 0, 1, 1);
-    layout->addWidget(ui->graphicsView, 0, 1);
-    layout->addWidget(ui->label_x, 1, 1, 1, 1, Qt::AlignLeft);
-    layout->addWidget(ui->label_y, 1, 1, 1, 1, Qt::AlignRight);
+    layout->addWidget(ui->label_x, 1, 0, 1, 1, Qt::AlignLeft);
+    layout->addWidget(ui->label_y, 1, 0, 1, 1, Qt::AlignRight);
 
     //Default values
+    resize(800,600);
     ui->label_x->setText("X: 0");
     ui->label_y->setText("Y: 0");
 
@@ -44,12 +45,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::exitposition_pressed(int x, int y)
 {
-    ui->label_x->setText("X: " + QString::number(x));
-    ui->label_y->setText("Y: " + QString::number(y));
+    mandel_window mw(-2,-1,1,1,myView);
+    ui->label_x->setText(QString::number(mw.m_x(x))+" / "+QString::number(mw.m_y(y)));
 }
 
 void MainWindow::exitposition_released(int x, int y)
 {
-    ui->label_x->setText("X: " + QString::number(x));
-    ui->label_y->setText("Y: " + QString::number(y));
+    mandel_window mw(-2,-1,1,1,myView);
+    ui->label_y->setText(QString::number(mw.m_x(x))+" / "+QString::number(mw.m_y(y)));
 }

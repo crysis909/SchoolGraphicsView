@@ -35,27 +35,28 @@ void Q4xBKIFGraphicsView::mousePressEvent(QMouseEvent *event)
     beginPoint.setX(event->x());
     beginPoint.setY(event->y());
 
-    if(rectItem)
-        delete rectItem;
-
-    rectItem = scene()->addRect(QRect(beginPoint, beginPoint));
-
     emit getposition_pressed(event->x(), event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseReleaseEvent(QMouseEvent *event)
 {
-    lastPoint.setX(event->x());
-    lastPoint.setY(event->y());
-
-    rectItem->setRect(QRect(beginPoint, lastPoint));
-
     emit getposition_released(event->x(), event->y());
 }
 
 void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
 {
-    rectItem->setRect(beginPoint.x(), beginPoint.y(), event->x() - beginPoint.x(), event->y() - beginPoint.y());
+    int w = event->x() - beginPoint.x();
+    int h = event->y() - beginPoint.y();
+
+    if(w > h * 3/2)
+        h = w * 2/3;
+    else
+        w = h * 3/2;
+
+    if(!rectItem)
+        rectItem=scene()->addRect(beginPoint.x(), beginPoint.y(), w, h);
+    else
+        rectItem->setRect(beginPoint.x(), beginPoint.y(), w, h);
 }
 
 void Q4xBKIFGraphicsView::resizeEvent(QResizeEvent *event)

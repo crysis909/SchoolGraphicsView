@@ -4,6 +4,7 @@
 #define MAX_ITER 256  //maximum iterations for calculation - influences color depth
 
 #include <QWidget>
+#include <QPointF>
 
 class mandel_window
 {
@@ -15,11 +16,9 @@ public:
 
 private:
     //the dimension of the mandelbrot area:
-    double X1;
-    double X2;
-    double Y1;
-    double Y2;
-    QWidget * W; //holds the Widget, that shows the graphics
+    QPointF leftUpper;
+    QPointF rightLower;
+    QWidget *W; //holds the Widget, that shows the graphics
 };
 
 #endif // MANDEL_WINDOW_H
