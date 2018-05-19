@@ -63,4 +63,6 @@ void Q4xBKIFGraphicsView::resizeEvent(QResizeEvent *event)
 {
     scene()->setSceneRect(rect());
     QGraphicsView::resizeEvent(event);
+
+    qDebug() << "Size: " << event->size();
 }

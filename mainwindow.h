@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include "q4xbkifgraphicsview.h"
+#include "mandel_window.h"
 
 namespace Ui {
 class MainWindow;
@@ -24,6 +25,7 @@ private:
     Q4xBKIFGraphicsView *myView;
     QGridLayout *layout;
     QWidget *widget;
+    mandel_window *mandelWindow;
 
 private slots:
     void exitposition_pressed(int x, int y);

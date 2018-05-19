@@ -1,13 +1,13 @@
 #ifndef Q4XBKIFGRAPHICSVIEW_H
 #define Q4XBKIFGRAPHICSVIEW_H
 
+#include <QPoint>
 #include <QObject>
 #include <QWidget>
+#include <QResizeEvent>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
-#include <QResizeEvent>
-#include <QPoint>
 
 class Q4xBKIFGraphicsView : public QGraphicsView
 {

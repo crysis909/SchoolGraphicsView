@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mandel_window.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,18 +10,19 @@ MainWindow::MainWindow(QWidget *parent) :
     //Init
     scene = new QGraphicsScene();
     myView = new Q4xBKIFGraphicsView(this, scene);
+    mandelWindow = new mandel_window(-2,-1,1,1,myView);
     layout = new QGridLayout();
     widget = new QWidget(this);
 
     //Layout
-    layout->addWidget(myView, 0, 0, 1, 1);
-    layout->addWidget(ui->label_x, 1, 0, 1, 1, Qt::AlignLeft);
-    layout->addWidget(ui->label_y, 1, 0, 1, 1, Qt::AlignRight);
+    layout->addWidget(myView, 1, 0, 1, 1);
+    layout->addWidget(ui->label_x, 0, 0, 1, 1, Qt::AlignLeft);
+    layout->addWidget(ui->label_y, 2, 0, 1, 1, Qt::AlignRight);
 
     //Default values
     resize(800,600);
-    ui->label_x->setText("X: 0");
-    ui->label_y->setText("Y: 0");
+    ui->label_x->setText("0 / 0");
+    ui->label_y->setText("0 / 0");
 
     myView->show();
 
@@ -33,10 +33,13 @@ MainWindow::MainWindow(QWidget *parent) :
     //Set Layout and Widget
     widget->setLayout(layout);
     setCentralWidget(widget);
+
+    myView->scene()->addPixmap(QPixmap::fromImage(*mandelWindow->drawImage()));
 }
 
 MainWindow::~MainWindow()
 {
+    delete mandelWindow;
     delete myView;
     delete layout;
     delete widget;
@@ -45,12 +48,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::exitposition_pressed(int x, int y)
 {
-    mandel_window mw(-2,-1,1,1,myView);
-    ui->label_x->setText(QString::number(mw.m_x(x))+" / "+QString::number(mw.m_y(y)));
+    ui->label_x->setText(QString::number(mandelWindow->m_x(x)) + " / " + QString::number(mandelWindow->m_y(y)));
 }
 
 void MainWindow::exitposition_released(int x, int y)
 {
-    mandel_window mw(-2,-1,1,1,myView);
-    ui->label_y->setText(QString::number(mw.m_x(x))+" / "+QString::number(mw.m_y(y)));
+    ui->label_y->setText(QString::number(mandelWindow->m_x(x)) + " / " + QString::number(mandelWindow->m_y(y)));
 }
