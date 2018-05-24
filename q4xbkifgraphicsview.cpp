@@ -2,7 +2,7 @@
 #include <QMouseEvent>
 #include <QDebug>
 
-Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene)
+Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QGraphicsScene *scene, QWidget *parent)
     :QGraphicsView(parent)
 {
     setScene(scene);
@@ -12,7 +12,7 @@ Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, QGraphicsScene *scene)
     rectItem = nullptr;
 }
 
-Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(QWidget *parent, int x, int y, int w, int h, QGraphicsScene *scene)
+Q4xBKIFGraphicsView::Q4xBKIFGraphicsView(int x, int y, int w, int h, QGraphicsScene *scene, QWidget *parent)
     :QGraphicsView(parent)
 {
     setFixedSize(w,h);
@@ -54,15 +54,16 @@ void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
         w = h * 3/2;
 
     if(!rectItem)
-        rectItem=scene()->addRect(beginPoint.x(), beginPoint.y(), w, h);
+        rectItem=scene()->addRect(beginPoint.x(), beginPoint.y(), w, h, QPen(QColor(Qt::yellow)));
     else
+    {
         rectItem->setRect(beginPoint.x(), beginPoint.y(), w, h);
+        rectItem->setZValue(1.0);
+    }
 }
 
 void Q4xBKIFGraphicsView::resizeEvent(QResizeEvent *event)
 {
     scene()->setSceneRect(rect());
     QGraphicsView::resizeEvent(event);
-
-    qDebug() << "Size: " << event->size();
 }

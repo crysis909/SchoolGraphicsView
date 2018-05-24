@@ -3,9 +3,6 @@
 
 mandel_window::mandel_window(double left, double upper, double right, double lower, QWidget *Window)
 {
-    image = new QImage(800,600,QImage::Format_RGB32);
-//  image = new QImage(Window->width(),Window->height(),QImage::Format_RGB32);
-
     leftUpper.setX(left);
     leftUpper.setY(upper);
 
@@ -13,11 +10,6 @@ mandel_window::mandel_window(double left, double upper, double right, double low
     rightLower.setY(lower);
 
     W=Window;
-}
-
-mandel_window::~mandel_window()
-{
-    delete image;
 }
 
 double mandel_window::m_x(int V_x)
@@ -51,43 +43,39 @@ int mandel_window::Mandel(int V_x, int V_y)
     return iterations;
 }
 
-int mandel_window::Mandel()
+QColor mandel_window::calculate_color(int f)
+// distributes the bits of f to three colors :
+// xxxxxxxx xxxxxxxx rgbrgbrg brgbrgbr
 {
-    Mx=0;
-    My=0;
-    M_z=0;
-    int iterations=0;
-    while(M_z<4 && iterations<MAX_ITER)
+    int AMPLIFY = 7;
+    int count = MAX_ITER;
+
+    //calculates the amount of bits to shift left to amplify brightness of color:
+    while(count)
     {
-        double Mxi=Mx*Mx-My*My+Cx;
-        My=2*Mx*My+Cy;
-        Mx=Mxi;
-        M_z=Mx*Mx+My*My;
-        iterations++;
+        count >>= 3;
+        AMPLIFY--;
     }
-    return iterations;
+    //colors to zero:
+    int red = 0;
+    int green = 0;
+    int blue = 0;
+
+    //calculate colors like scheme in description:
+    for(int i = 0; i < 6; i++) { red   += (f& (0x00000001 << (i * 3))) >> (i * 2); }
+    for(int i = 0; i < 5; i++) { green += (f& 0x0000002 << (i * 3)) >> (i * 2); }
+    for(int i = 0; i < 5; i++) { blue  += (f& 0x00000004 << (i * 3)) >> (i * 2 + 1); }
+
+    //maximize brightness:
+    red   <<= AMPLIFY;
+    green <<= AMPLIFY;
+    blue  <<= AMPLIFY;
+
+    return(QColor(red, green, blue));
 }
 
-QImage *mandel_window::drawImage()
+QDebug operator<<(QDebug d, const mandel_window *window)
 {
-    for(int row=0;row<500;row++)
-    {
-        for(int col=0;col<750;col++)
-        {
-            //Mandelbrot Berechnung
-            Cx=(col-500)*X_SCALE;
-            Cy=(row-250)*Y_SCALE;
-            int farbnr= Mandel();
-            int red=0,green=0,blue=0;
-            switch( farbnr%3)
-            {
-            case 0: red=farbnr;break;
-            case 1: green=farbnr;break;
-            case 2: blue=farbnr;break;
-            };
-
-            image->setPixelColor(col,row,QColor(red,green,blue));
-        }
-    }
-    return image;
+    d << "LeftUpper: " << window->leftUpper << " RightLower: " << window->rightLower;
+    return d;
 }
