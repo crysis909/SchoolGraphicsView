@@ -6,7 +6,7 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPushButton>
-#include <QStack>
+#include <QVector>
 #include <QResizeEvent>
 #include "q4xbkifgraphicsview.h"
 #include "mandel_window.h"
@@ -25,8 +25,9 @@ public:
 
 private:
     //Variable
-    QStack<mandel_window*> history;
+    QVector<mandel_window*> history;
     double sub_left, sub_upper;     //holds corner of selected zoom window
+    int index;
 
     //Overlay
     Ui::MainWindow *ui;

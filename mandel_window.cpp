@@ -9,7 +9,7 @@ mandel_window::mandel_window(double left, double upper, double right, double low
     rightLower.setX(right);
     rightLower.setY(lower);
 
-    W=Window;
+    W = Window;
 }
 
 double mandel_window::m_x(int V_x)
@@ -63,8 +63,8 @@ QColor mandel_window::calculate_color(int f)
 
     //calculate colors like scheme in description:
     for(int i = 0; i < 6; i++) { red   += (f& (0x00000001 << (i * 3))) >> (i * 2); }
-    for(int i = 0; i < 5; i++) { green += (f& 0x0000002 << (i * 3)) >> (i * 2); }
-    for(int i = 0; i < 5; i++) { blue  += (f& 0x00000004 << (i * 3)) >> (i * 2 + 1); }
+    for(int i = 0; i < 5; i++) { green += (f&  0x0000002  << (i * 3))  >> (i * 2); }
+    for(int i = 0; i < 5; i++) { blue  += (f&  0x00000004 << (i * 3))  >> (i * 2 + 1); }
 
     //maximize brightness:
     red   <<= AMPLIFY;

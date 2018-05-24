@@ -46,6 +46,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    for (auto &window : history)
+        delete window;
+
+
     delete Ima;
     delete Pixm;
     delete current_mandel;
@@ -94,7 +98,10 @@ void MainWindow::exitposition_released(int x, int y)
 
     //update mandel_window:
     if(current_mandel)
-        history.push(current_mandel);
+    {
+        history.append(current_mandel);
+        index = history.length();
+    }
 
     current_mandel = new mandel_window(sub_left, sub_upper, sub_right, sub_lower,myView);
     draw_mandel();
@@ -103,20 +110,22 @@ void MainWindow::exitposition_released(int x, int y)
 
 void MainWindow::nextPressed()
 {
-
+    if(index < history.length())
+    {
+        current_mandel = history[++index];
+        draw_mandel();
+    }
+    qDebug() << index;
 }
 
 void MainWindow::backPressed()
 {
-    if(!history.isEmpty())
+    if(index > 0)
     {
-        delete prev;
-
-        prev = history.top();
-
-        current_mandel = history.pop();
+        current_mandel = history[--index];
         draw_mandel();
     }
+    qDebug() << index;
 }
 
 //void MainWindow::resizeEvent(QResizeEvent *event)
