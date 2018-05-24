@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     back = new QPushButton("<--", this);
     layout = new QGridLayout();
     widget = new QWidget(this);
-    Ima = new QImage(780,500,QImage::Format_RGB888);
+    Ima = new QImage(842,454,QImage::Format_RGB888);
     Pixm = nullptr;
     prev = nullptr;
 
@@ -35,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //Connects
     connect(myView, SIGNAL(getposition_pressed(int, int)), this, SLOT(exitposition_pressed(int, int)));
     connect(myView, SIGNAL(getposition_released(int, int)), this, SLOT(exitposition_released(int, int)));
-//    connect(next, SIGNAL(pressed()), this, SLOT(nextPressed()));
-//    connect(back, SIGNAL(pressed()), this, SLOT(backPressed()));
+    connect(next, SIGNAL(pressed()), this, SLOT(nextPressed()));
+    connect(back, SIGNAL(pressed()), this, SLOT(backPressed()));
 
     //Set Layout and Widget
     widget->setLayout(layout);
@@ -94,31 +94,30 @@ void MainWindow::exitposition_released(int x, int y)
 
     //update mandel_window:
     if(current_mandel)
-//        history.push(current_mandel);
-        delete current_mandel;
+        history.push(current_mandel);
 
     current_mandel = new mandel_window(sub_left, sub_upper, sub_right, sub_lower,myView);
     draw_mandel();
 
 }
 
-//void MainWindow::nextPressed()
-//{
+void MainWindow::nextPressed()
+{
 
-//}
+}
 
-//void MainWindow::backPressed()
-//{
-//    if(!history.isEmpty())
-//    {
-//        delete prev;
+void MainWindow::backPressed()
+{
+    if(!history.isEmpty())
+    {
+        delete prev;
 
-//        prev = history.top();
+        prev = history.top();
 
-//        current_mandel = history.pop();
-//        draw_mandel();
-//    }
-//}
+        current_mandel = history.pop();
+        draw_mandel();
+    }
+}
 
 //void MainWindow::resizeEvent(QResizeEvent *event)
 //{

@@ -6,7 +6,7 @@
 #include <QGraphicsScene>
 #include <QImage>
 #include <QPushButton>
-//#include <QStack>
+#include <QStack>
 #include <QResizeEvent>
 #include "q4xbkifgraphicsview.h"
 #include "mandel_window.h"
@@ -25,7 +25,7 @@ public:
 
 private:
     //Variable
-//    QStack<mandel_window*> history;
+    QStack<mandel_window*> history;
     double sub_left, sub_upper;     //holds corner of selected zoom window
 
     //Overlay
@@ -51,8 +51,8 @@ private slots:
     void exitposition_released(int x, int y);
 
     //Button
-//    void nextPressed();
-//    void backPressed();
+    void nextPressed();
+    void backPressed();
 
 protected:
 //    virtual void resizeEvent(QResizeEvent *event);
