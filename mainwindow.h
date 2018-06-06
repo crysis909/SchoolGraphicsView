@@ -8,6 +8,11 @@
 #include <QPushButton>
 #include <QVector>
 #include <QResizeEvent>
+#include <QMessageBox>
+#include <QBuffer>
+#include <QFile>
+#include <QFileDialog>
+
 #include "q4xbkifgraphicsview.h"
 #include "mandel_window.h"
 
@@ -23,9 +28,12 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+    void resizeImage();
 private:
     //Variable
-    QVector<mandel_window*> history;
+    QVector <mandel_window*> mandelliste_Back;
+    QVector <mandel_window*> mandelliste_Forward;
+
     double sub_left, sub_upper;     //holds corner of selected zoom window
     int index;
 
@@ -41,6 +49,8 @@ private:
     QGraphicsPixmapItem *Pixm;      //Holds Pointer to Pixmap in scene
     QPushButton *next;
     QPushButton *back;
+    QPushButton *save;
+    QMessageBox msgBox;
 
     //Functions
     void draw_mandel();  //uses current_mandel to calculate the pixels of qimage Ima
@@ -54,9 +64,10 @@ private slots:
     //Button
     void nextPressed();
     void backPressed();
+    void savePressed();
 
 protected:
-//    virtual void resizeEvent(QResizeEvent *event);
+    virtual void resizeEvent(QResizeEvent *event);
 };
 
 #endif // MAINWINDOW_H
