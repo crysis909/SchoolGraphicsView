@@ -113,23 +113,25 @@ void MainWindow::exitposition_released(int x, int y)
 
 void MainWindow::nextPressed()
 {
-    if(current_mandel && mandelliste_Forward.size() != 0){
+    if(mandelliste_Forward.isEmpty()) return;
 
+    if(current_mandel)
         mandelliste_Back.append(current_mandel);
-    }
 
     current_mandel = mandelliste_Forward.last(); // save the last mandelliste
 
     mandelliste_Forward.remove(mandelliste_Forward.length()-1); //deletes last mandelliste
 
     draw_mandel();
+
 }
 
 void MainWindow::backPressed()
 {
-    if(current_mandel && mandelliste_Back.size() != 0){
+    if(mandelliste_Back.isEmpty()) return ;
+
+    if(current_mandel)
         mandelliste_Forward.append(current_mandel);
-    }
 
     current_mandel = mandelliste_Back.last(); //save the last mandel window
 
@@ -145,7 +147,7 @@ void MainWindow::savePressed()
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), "", tr("Images (*.png *.jpg)"));
 
     buffer.open(QIODevice::WriteOnly);
-    bool erro = Ima->save(&buffer, "PNG");
+    bool erro = Ima->save(&buffer, "PNG", 100);
 
     if(erro)
     {
