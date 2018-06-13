@@ -15,6 +15,7 @@
 
 #include "q4xbkifgraphicsview.h"
 #include "mandel_window.h"
+#include "screenshoot.h"
 
 namespace Ui {
 class MainWindow;
@@ -29,13 +30,13 @@ public:
     ~MainWindow();
 
     void resizeImage();
+
 private:
     //Variable
     QVector <mandel_window*> mandelliste_Back;
     QVector <mandel_window*> mandelliste_Forward;
 
     double sub_left, sub_upper;     //holds corner of selected zoom window
-    int index;
 
     //Overlay
     Ui::MainWindow *ui;
@@ -50,8 +51,11 @@ private:
     QPushButton *next;
     QPushButton *back;
     QPushButton *save;
+    QPushButton *screenshot;
     QMessageBox msgBox;
-
+    Screenshoot *screen;
+    QString xcord;
+    QString ycord;
     //Functions
     void draw_mandel();  //uses current_mandel to calculate the pixels of qimage Ima
                         //and gives it to Scene
@@ -65,6 +69,7 @@ private slots:
     void nextPressed();
     void backPressed();
     void savePressed();
+    void screenPressed();
 
 protected:
     virtual void resizeEvent(QResizeEvent *event);

@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     next = new QPushButton("-->", this);
     back = new QPushButton("<--", this);
     save = new QPushButton("Save", this);
+    screenshot = new QPushButton("Screen", this);
     layout = new QGridLayout();
     widget = new QWidget(this);
     Ima = new QImage(842,454,QImage::Format_RGB888);
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(next, 0, 3, Qt::AlignRight);
     layout->addWidget(back, 0, 2, Qt::AlignAbsolute);
     layout->addWidget(save, 0, 4, Qt::AlignAbsolute);
+    layout->addWidget(screenshot, 0, 5, Qt::AlignAbsolute);
     layout->addWidget(ui->label_x, 0, 0, Qt::AlignLeft);
     layout->addWidget(ui->label_y, 2, 3, Qt::AlignRight);
 
@@ -40,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(next, SIGNAL(pressed()), this, SLOT(nextPressed()));
     connect(back, SIGNAL(pressed()), this, SLOT(backPressed()));
     connect(save, SIGNAL(pressed()), this, SLOT(savePressed()));
+    connect(screenshot, SIGNAL(pressed()), this, SLOT(screenPressed()));
 
     //Set Layout and Widget
     widget->setLayout(layout);
@@ -49,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+    delete screen;
     delete Ima;
     delete Pixm;
     delete current_mandel;
@@ -86,8 +90,10 @@ void MainWindow::draw_mandel()
 
 void MainWindow::exitposition_pressed(int x, int y)
 {
-    ui->label_y->setText(QString::number(current_mandel->m_x(x)) + "/" +
-                         QString::number(current_mandel->m_y(y)));
+    ycord = QString::number(current_mandel->m_x(x)) + "/" +
+            QString::number(current_mandel->m_y(y));
+
+    ui->label_y->setText(ycord);
 
     //store new values of corner:
     sub_left  = current_mandel->m_x(x);
@@ -96,8 +102,10 @@ void MainWindow::exitposition_pressed(int x, int y)
 
 void MainWindow::exitposition_released(int x, int y)
 {    
-    ui->label_x->setText(QString::number(current_mandel->m_x(x)) + "/" +
-                         QString::number(current_mandel->m_y(y)));
+    xcord = QString::number(current_mandel->m_x(x)) + "/" +
+            QString::number(current_mandel->m_y(y));
+
+    ui->label_x->setText(xcord);
 
     //store new values of corner:
     double sub_right = current_mandel->m_x(x);
@@ -141,7 +149,7 @@ void MainWindow::backPressed()
 }
 
 void MainWindow::savePressed()
-{
+{   
     QByteArray ba;
     QBuffer buffer(&ba);
     QString fileName = QFileDialog::getSaveFileName(this, tr("Save Image"), "", tr("Images (*.png *.jpg)"));
@@ -169,6 +177,12 @@ void MainWindow::savePressed()
         msgBox.exec();
     }
 
+}
+
+void MainWindow::screenPressed()
+{
+    screen = new Screenshoot(Ima, xcord, ycord);
+    screen->show();
 }
 
 /*

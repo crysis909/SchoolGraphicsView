@@ -26,10 +26,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     q4xbkifgraphicsview.cpp \
-    mandel_window.cpp
+    mandel_window.cpp \
+    screenshoot.cpp
 
 HEADERS  += mainwindow.h \
     q4xbkifgraphicsview.h \
-    mandel_window.h
+    mandel_window.h \
+    screenshoot.h
 
 FORMS    += mainwindow.ui
