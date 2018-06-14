@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     screenshot = new QPushButton("Screen", this);
     layout = new QGridLayout();
     widget = new QWidget(this);
-    Ima = new QImage(842,454,QImage::Format_RGB888);
+    Ima = new QImage(800,600,QImage::Format_RGB888);
     Pixm = nullptr;
     prev = nullptr;
 
@@ -31,8 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     layout->addWidget(ui->label_y, 2, 3, Qt::AlignRight);
 
     //Default values
-    ui->label_x->setText("0 / 0");
-    ui->label_y->setText("0 / 0");
+    ui->label_x->setText("-2.0 / -1.0");
+    ui->label_y->setText("1.0 / 1.0");
 
     myView->show();
 
@@ -77,6 +77,7 @@ void MainWindow::draw_mandel()
         for (int column = 0; column < Ima->width(); column++)
             Ima->setPixelColor(column,row,
                                current_mandel->calculate_color(current_mandel->Mandel(column,row)));
+    //Crash at col 266 and row 380 || col 568 and row 600
 
     //gives temp to scene
     if(!Pixm)
@@ -131,7 +132,6 @@ void MainWindow::nextPressed()
     mandelliste_Forward.remove(mandelliste_Forward.length()-1); //deletes last mandelliste
 
     draw_mandel();
-
 }
 
 void MainWindow::backPressed()
@@ -185,17 +185,9 @@ void MainWindow::screenPressed()
     screen->show();
 }
 
-/*
-void MainWindow::resizeImage()
-{
-    qDebug() << "OPic: " << Ima->size();
-    QImage temp = Ima->scaled(scene->width(),scene->height());  //Image resize to Scene size
-    qDebug() << "NPic: " << temp.size();
-    Ima = &temp;
-}
-*/
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
+    Ima = new QImage(Ima->bits(), scene->width(), scene->height(), QImage::Format_RGB888);
     QMainWindow::resizeEvent(event);
-    //resizeImage();
+    draw_mandel();
 }

@@ -13,10 +13,11 @@ class Screenshoot : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Screenshoot( QImage *image = nullptr, QString x = "0 / 0" , QString y = "0 / 0" , QWidget *parent = nullptr);
+    explicit Screenshoot(QImage *image, QString x = "0 / 0" , QString y = "0 / 0" , QWidget *parent = nullptr);
 
 private:
     QImage *_image;
+    QImage _temp;
     QGridLayout *layout;
     QLabel *x_cord;
     QLabel *y_cord;

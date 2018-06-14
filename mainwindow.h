@@ -39,23 +39,24 @@ private:
     double sub_left, sub_upper;     //holds corner of selected zoom window
 
     //Overlay
+    Q4xBKIFGraphicsView *myView;
+    QGraphicsPixmapItem *Pixm;      //Holds Pointer to Pixmap in scene
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    Q4xBKIFGraphicsView *myView;
-    QGridLayout *layout;
-    QWidget *widget;
     mandel_window *current_mandel;  //holds the current mandel window coords
     mandel_window *prev;
-    QImage *Ima;                    //holds the mandel graphics
-    QGraphicsPixmapItem *Pixm;      //Holds Pointer to Pixmap in scene
+    QGridLayout *layout;
     QPushButton *next;
     QPushButton *back;
     QPushButton *save;
     QPushButton *screenshot;
     QMessageBox msgBox;
     Screenshoot *screen;
-    QString xcord;
-    QString ycord;
+    QWidget *widget;
+    QString xcord = "-2.0 / -1.0";
+    QString ycord = "1.0 / 1.0";
+    QImage *Ima;                    //holds the mandel graphics
+
     //Functions
     void draw_mandel();  //uses current_mandel to calculate the pixels of qimage Ima
                         //and gives it to Scene

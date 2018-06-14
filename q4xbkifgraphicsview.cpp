@@ -64,6 +64,7 @@ void Q4xBKIFGraphicsView::mouseMoveEvent(QMouseEvent *event)
 
 void Q4xBKIFGraphicsView::resizeEvent(QResizeEvent *event)
 {
+    resize(event->size());
     scene()->setSceneRect(rect());
     QGraphicsView::resizeEvent(event);
 }
